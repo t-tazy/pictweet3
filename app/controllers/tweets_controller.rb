@@ -2,7 +2,9 @@ class TweetsController < ApplicationController
   before_action :set_tweet, only: %i[edit show]
   before_action :move_to_index, except: %i[index show search]
   def index
-    @tweets = Tweet.includes(:user).order("created_at DESC")
+    # @tweets = Tweet.includes(:user).order("created_at DESC")
+    query = "SELECT * FROM tweets"
+    @tweets = Tweet.find_by_sql(query)
   end
 
   def new
